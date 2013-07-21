@@ -1,0 +1,115 @@
+<div class="row-fluid" ng-controller="SpectralWaveCtrl">
+	<section class="span9">
+		<!--alert-->
+		<div class="alert well-dark alert-block white" id="createEventSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>L'event a bien &eacute;t&eacute; ajout&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteEventSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>L'event a bien &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteEventError">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Erreur!</h3>
+			<p>L'event n'a pas &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="editEventSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>L'event a bien &eacute;t&eacute; modifi&eacute;.</p>
+		</div>
+
+
+		<div class="alert well-dark alert-block white" id="createNewsSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>La news a bien &eacute;t&eacute; ajout&eacute;e.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteNewsSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>La news a bien &eacute;t&eacute; effac&eacute;e.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteNewsError">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Erreur!</h3>
+			<p>La news n'a pas &eacute;t&eacute; effac&eacute;e.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="editNewsSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>La news a bien &eacute;t&eacute; modifi&eacute;e.</p>
+		</div>
+		
+
+		<!-- fin alert-->
+		<header class="page-header">
+			<h1>Derni&egrave;res news publi&eacute;es
+				<a id="addNewsImg" ng-show="admin" href="#newsPopUp" data-toggle="modal"><i class="icon-plus icon-white"></i></a>
+				<a class="btn btn-inverse pull-right" href="#/news">Voir toutes les news</a>
+			</h1>
+		</header>
+		<div id="newsContainer">
+			<article ng-repeat="n in news |limitTo:5" class="well well-dark" newsid={{n.id}}>
+				<h2 class="well-header"><a href="#/news/{{n.id}}">{{n.titre}}</a>
+					<a ng-show="admin" href="#newsPopUp" data-toggle="modal"><i class="icon-edit icon-white editNews"></i></a>
+					<i ng-show="admin" class="icon-white icon-trash pull-right pointer delNews"></i>
+					<a href="#/news/{{n.id}}">
+						<span class="badge badge-inverse pull-right">
+							<i class="icon-white icon-comment"></i> <small style="font-size:11px;">{{n.nbComments}}</small>
+						</span>
+					</a>
+				</h2>
+				<p ng-bind-html-unsafe="n.description"></p>
+				<footer class="well-footer">
+					<time class="pull-left" datetime="{{n.pubdate | date:'yyyy-MM-dd'}}" pubdate>Publi&eacute;e le <strong>{{n.pubdate | date:'dd MMMM yyyy &agrave; HH:mm:ss'}}</strong></time>
+					<span class="badge badge-inverse pull-right">
+						<i class="icon-tag icon-white"></i> <small>{{n.jeu}}</small>
+					</span>
+				</footer>
+			</article>
+		</div>
+	</section>
+	<section class="span3">
+		<div class="page-header">
+			<h1>Events
+				<a id="addEventImg" href="#eventPopUp" data-toggle="modal" ng-show="admin">
+					<i class="icon-plus icon-white"></i>
+				</a>
+				<a class="btn btn-inverse pull-right" href="#/events">Voir tous les events</a>
+			</h1>
+		</div>
+		<div id="eventsContainer">
+			<article ng-repeat="e in events |limitTo:4" class="well-small well-dark" eventid={{e.id}}>
+				<h2 class="well-header"><a href="#/events/{{e.id}}">{{e.titre | truncate:20}}</a>
+					<a ng-show="admin" href="#eventPopUp" data-toggle="modal"><i class="icon-edit icon-white editEvent"></i></a>
+					<i class="icon-white icon-trash pull-right pointer delEvent" ng-show="admin"></i>
+					<a href="#/events/{{e.id}}">
+						<span class="badge badge-inverse pull-right">
+							<i class="icon-white icon-comment"></i> <small style="font-size:11px;">{{e.nbComments}}</small>
+						</span>
+					</a>
+				</h2>
+				<p ng-bind-html-unsafe="e.description | truncate:60"></p>
+				<p style="min-height:10px;">
+					<time class="pull-left" datetime="{{e.date | date:'yyyy-MM-dd'}}">{{e.date | date:'dd MMMM yyyy'}}</time>
+					<span class="badge badge-inverse pull-right">
+						<i class="icon-tag icon-white"></i> <small>{{e.jeu}}</small>
+					</span>
+
+				</p>
+			</article>
+			<article class="well-small well-dark" ng-show="events.length==0">
+				<p>Il n'y a aucun event pour le moment</p>
+			</article>
+		</div>
+	</section>
+</div>
+
+
+
+<div ng-include src="'partials/popup/newsPopUp.html'"></div>
+<div ng-include src="'partials/popup/eventPopUp.html'"></div>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en" ng-controller="MainCtrl">
+<head>
+  <script type="text/javascript" src="lib/jquery-1.7.2.js"></script>
+  <script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
+  <meta charset="utf-8">
+  <style>
+    [ng-cloak] {
+      display: none;
+    }
+  </style>
+  <script>
+    // include angular loader, which allows the files to load in any order
+    /*
+     AngularJS v1.0.0rc1
+     (c) 2010-2012 AngularJS http://angularjs.org
+     License: MIT
+    */
+    'use strict';(function(i){function d(c,a,e){return c[a]||(c[a]=e())}return d(d(i,"angular",Object),"module",function(){var c={};return function(a,e,f){e&&c.hasOwnProperty(a)&&(c[a]=null);return d(c,a,function(){function b(a,b,d){return function(){c[d||"push"]([a,b,arguments]);return g}}if(!e)throw Error("No module: "+a);var c=[],d=[],h=b("$injector","invoke"),g={_invokeQueue:c,_runBlocks:d,requires:e,name:a,provider:b("$provide","provider"),factory:b("$provide","factory"),service:b("$provide","service"),
+    value:b("$provide","value"),constant:b("$provide","constant","unshift"),filter:b("$filterProvider","register"),directive:b("$compileProvider","directive"),config:h,run:function(a){d.push(a);return this}};f&&h(f);return g})}})})(window);
+
+    // include a third-party async loader library
+    /*!
+     * $script.js v1.3
+     * https://github.com/ded/script.js
+     * Copyright: @ded & @fat - Dustin Diaz, Jacob Thornton 2011
+     * Follow our software http://twitter.com/dedfat
+     * License: MIT
+     */
+    !function(a,b,c){function t(a,c){var e=b.createElement("script"),f=j;e.onload=e.onerror=e[o]=function(){e[m]&&!/^c|loade/.test(e[m])||f||(e.onload=e[o]=null,f=1,c())},e.async=1,e.src=a,d.insertBefore(e,d.firstChild)}function q(a,b){p(a,function(a){return!b(a)})}var d=b.getElementsByTagName("head")[0],e={},f={},g={},h={},i="string",j=!1,k="push",l="DOMContentLoaded",m="readyState",n="addEventListener",o="onreadystatechange",p=function(a,b){for(var c=0,d=a.length;c<d;++c)if(!b(a[c]))return j;return 1};!b[m]&&b[n]&&(b[n](l,function r(){b.removeEventListener(l,r,j),b[m]="complete"},j),b[m]="loading");var s=function(a,b,d){function o(){if(!--m){e[l]=1,j&&j();for(var a in g)p(a.split("|"),n)&&!q(g[a],n)&&(g[a]=[])}}function n(a){return a.call?a():e[a]}a=a[k]?a:[a];var i=b&&b.call,j=i?b:d,l=i?a.join(""):b,m=a.length;c(function(){q(a,function(a){h[a]?(l&&(f[l]=1),o()):(h[a]=1,l&&(f[l]=1),t(s.path?s.path+a+".js":a,o))})},0);return s};s.get=t,s.ready=function(a,b,c){a=a[k]?a:[a];var d=[];!q(a,function(a){e[a]||d[k](a)})&&p(a,function(a){return e[a]})?b():!function(a){g[a]=g[a]||[],g[a][k](b),c&&c(d)}(a.join("|"));return s};var u=a.$script;s.noConflict=function(){a.$script=u;return this},typeof module!="undefined"&&module.exports?module.exports=s:a.$script=s}(this,document,setTimeout)
+
+    // load all of the dependencies asynchronously.
+    $script([
+      'lib/angular/angular.js',
+      'js/app.js',
+      'js/services.js',
+      'js/controllers.js',
+      'js/filters.js',
+      'js/directives.js',
+      'js/controllers/detailledEvent.js',
+      'js/controllers/detailledNews.js',
+      'js/controllers/SpectralWave.js',
+      'js/controllers/EventPopUp.js',
+      'js/controllers/NewsPopUp.js',
+      'js/controllers/AllEvent.js',
+      'js/controllers/AllNews.js'
+    ], function() {
+      // when all is done, execute bootstrap angular application
+      angular.bootstrap(document, ['myApp']);
+    });
+  </script>
+  <title>SpectralWave</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/bootstrap-responsive.css"/>
+  <link rel="stylesheet" href="css/style.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <!--[if lte IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script type="text/javascript" src="includes/ie.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles/ie.css" />
+  <![endif]-->
+  <meta name="author" content="Aelfwine54 Karaz SpectralWave" />
+  <meta name="keywords" content="SpectralWave, Minecraft, serveur, roleplay, rp, build, semi-rp, bukkit, crafting, tutoriel, karaz, karaz111, launcher" />
+  <meta name="description" content="SpectralWave est une team multigaming presente sur plusieur jeux." />
+  <style>
+    body{
+      padding:40px;
+      background:url('img/space-bg.png') repeat-x fixed -80% 0;
+      background-color: #1A1A1A;
+    }
+  </style>
+  <script type="text/javascript" src="lib/bootstrap/bootstrap.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="lib/date.format.js"></script>
+  <script type="text/javascript" src="lib/jquery.base64.min.js"></script>
+  <script type="text/javascript" src="http://code.angularjs.org/1.0.0rc9/i18n-1.0.0rc9/angular-locale_fr-fr.js"></script>
+
+      <script type="text/javascript" src="lib/bbcode/xbbcode/xbbcode.js?2012.02.07"></script>
+      <link rel="stylesheet" type="text/css" href="lib/bbcode/xbbcode/xbbcode.css" />
+
+  <link rel="icon" type="image/png" href="img/favicon.png"/>
+</head>
+<body>
+  <!--[if lte IE 8]>
+    <p style="color:red;background-color:black;font-size:2em;width:70%;margin:auto;">Ce site web est basé sur des technologies modernes. Si vous voyez ce message, c'est que votre navigateur n'intègre pas ces technologies. Pour un meilleur confort sur ce site web, je vous recommande d'opter pour un navigateur plus récent. Vous trouverez sur <a href="http://www.browserchoice.eu/BrowserChoice/browserchoice_fr.htm" style="display:inline;">ce lien</a> une liste de choix possibles.</p>
+  <![endif]-->
+  <section>
+    <header class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".main-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#/index" ng-click="switchMenuActif('')">Spectral Wave</a>
+          <div class="nav-collapse main-collapse">
+            <ul class="nav">
+              <!-- <li class="divider-vertical"></li>
+              <li class="dropdown" id="jeuxMainBar">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                  Jeux <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li id="minecraftDropBar"><a href="minecraft.php">Minecraft</a></li>
+                  <li id="lolDropBar"><a href="legends.php"><abbr title="League of Legends">LoL</abbr></a></li>
+                  <li id="apbDropBar"><a href="apb.php"><abbr title="All Points Bulletin">APB</abbr></a></li>
+                  <li id="gtaDropBar"><a href="gta.php"><abbr title="Grand Theft Auto">GTA</abbr></a></li>
+                  <li id="globalDropBar"><a href="globalAgenda.php">Global Agenda</a></li>
+                  <li class="divider"></li>
+                  <li id="allGamesDropBar"><a href="allGames.php">Tous les jeux</a></li>
+                </ul>
+              </li>
+              <li class="divider-vertical"></li>
+              <li id="communauteMainBar" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Communaut&eacute; <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li id="communauteDropBar"><a href="communaute.php">Communaut&eacute;</a></li>
+                  <li id="joueurDropBar"><a href="joueurs.php">Joueurs</a></li>
+                  <li id="regleDropBar"><a href="regle.php">R&egrave;gles</a></li>
+                </ul>
+              </li>-->
+              <li class="divider-vertical"></li>
+              <li id="mediaMainBar" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  M&eacute;dias <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li id="telechargementDropBar"><a href="#/telechargements" ng-click="switchMenuActif('#mediaMainBar','#telechargementDropBar')">T&eacute;l&eacute;chargements</a></li>
+                  <li class="divider"></li>
+                  <li id="forumDropBar"><a href="http://spectralwave.xooit.fr/portal.php" target="_BLANK">Forum</a></li>
+                  <li id="youtubeDropBar"><a href="http://www.youtube.com/user/SpectralWaveTeam?feature=mhee"  target="_BLANK">Youtube</a></li>
+                  <li id="facebookDropBar"><a href="http://www.facebook.com/pages/Rolecraft/146480495468312?ref=ts" target="_BLANK">Facebook</a></li>
+                  <li id="twitterDropBar"><a href="https://twitter.com/SpectralwaveTea"  target="_BLANK">Twitter</a></li>
+                </ul>
+              </li>
+              <li class="divider-vertical"></li>
+              <li id="viewer"><a href="#/viewers" ng-click="switchMenuActif('#viewer')">Viewers</a></li>
+              <li class="divider-vertical"></li>
+              <li id="regle"><a href="#/regles" ng-click="switchMenuActif('#regle')">R&egrave;glements</a></li>
+              <li class="divider-vertical"></li>
+              <li id="serveur"><a href="#/serveurs" ng-click="switchMenuActif('#serveur')">Serveurs</a></li>
+              
+            </ul>
+
+            <ul class="pull-right nav" >
+              <li class="dropdown" ng-show="connect">
+                <a href="#" class="dropdown-toggle" data-toggle = "dropdown">
+                  {{pseudo}} <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li id="logout">
+                    <a ng-click="logout()">D&eacute;connexion</a>
+                  </li>
+                </ul>
+              </li>
+
+
+
+              <li class="dropdown" id="connexionDropDown" ng-hide="connect">
+                <a href="#" class="drowdown-toggle" data-toggle="dropdown">
+                  Connexion <b class="caret"></b>
+                </a>
+                <form class="dropdown-menu credential-form" ng-submit="connexion()" name="connexionForm">
+                  <input ng-model="user.pseudo" type="text" placeholder="Nom d'utilisateur" required/>
+                  <input ng-model="user.password" type="password" placeholder="Mot de passe" required/>
+                  <p class="red">{{errorMessage}}</p>
+                  <button type="submit" class="btn btn-primary" ng-disabled="connexionForm.$invalid">Connexion</button>
+                </form>
+              </li>
+              <li class="divider-vertical" ng-hide="connect"></li>
+              <li class="dropdown" ng-hide="connect">
+                <a href="#" class="drowdown-toggle" data-toggle="dropdown">
+                  Inscription <b class="caret"></b>
+                </a>
+                <form class="dropdown-menu credential-form" ng-submit="inscription()" name="inscriptionForm">
+                  <input id="pseudo" type="text" placeholder="Nom d'utilisateur" ng-model="newUser.pseudo" required/>
+                  <input id="password" type="password" placeholder="Mot de passe" ng-model="newUser.password" required/>
+                  <input id="courriel" type="text" placeholder="Adresse courriel" ng-model="newUser.courriel" required/>
+                  <p class="red" ng-repeat="p in errorMessage">{{p}}</p>
+                  <p class="alert-success">{{confirmMessage}}</p>
+                  <!-- <span class="help-inline">Un courriel de confirmation sera envoy&eacute; &agrave; cette adresse.</span> -->
+                  <button type="submit" class="btn btn-primary" ng-disabled="inscriptionForm.$invalid">Inscription</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+  </section>
+
+  <section class="container-fluid">
+    <figure id="logo"><img src="img/newLogo.jpg" alt="SpectralWave"/></figure>
+
+    <div class="row-fluid" id="body">
+      <div class="span12">
+
+        <div ng-view></div>
+
+      </div><!-- end of span12 main (body) -->
+    </div><!--end of row-fluid-->
+      <footer>
+        <div class="footer">
+          <a href="#/version">Version 1.5 - XXX 2013</a><br />
+          <a href="http://fredericbergeron.net/dev" target="_BLANK">
+            Commandite de Solutions informatiques Fr&eacute;d&eacute;ric Bergeron. Copyright &copy; 2013 - Tous droits r&eacute;serv&eacute;s
+          </a><br />
+            <a href="https://twitter.com/SpectralwaveTea" class="twitter-follow-button" data-show-count="false" data-lang="fr" data-size="small">Suivre @SpectralwaveTeam</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+            </script><br />
+            Votez pour <a href="http://www.mcserv.org/SpectralWaveteam_4291.html">SpectralWave</a> sur <a href="http://www.mcserv.org/">McServ.org</a>
+          <address>
+            <a href="mailto: spectralewave@gmail.com" style="display:inline">spectralewave@gmail.com</a><br />
+            <!-- <a target="_BLANK" href="http://www.serveurs-minecraft.org/vote.php?id=8569">Voter pour SpectralWave</a> -->
+          </address>
+        </div>
+      </footer>
+
+  </section><!-- end of container -->
+</body>
+
+</html>

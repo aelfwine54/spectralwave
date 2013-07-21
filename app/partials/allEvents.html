@@ -1,0 +1,58 @@
+<div class="row-fluid" ng-controller="AllEventsCtrl">
+	<section class="span12">
+		<!--alert-->
+		<div class="alert well-dark alert-block white" id="createEventSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>L'event a bien &eacute;t&eacute; ajout&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteEventSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>L'event a bien &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteEventError">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Erreur!</h3>
+			<p>L'event n'a pas &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+
+		<!-- fin alert-->
+		<div class="page-header">
+			<h1>Liste des events
+				<a id="addEventsImg" ng-show="admin" href="#eventsPopUp" data-toggle="modal"><i class="icon-plus icon-white"></i></a>
+			</h1>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Jeu</th>
+					<th>Titre</th>
+					<th>Date de l'event</th>
+					<th>Commentaires</th>
+					<th ng-show="admin"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="e in events" eventid={{e.id}}>
+					<td><a href="#/events/{{e.id}}">[Lire]</a></td>
+					<td>{{e.jeu}}</td>
+					<td>{{e.titre}}</td>
+					<td><time datetime="{{e.date | date:'yyyy-MM-dd'}}" pubdate>Le <strong>{{e.date | date:'dd MMMM yyyy &agrave; HH:mm:ss'}}</strong></time></td>
+					<td>{{e.nbComments}}</td>
+					<td ng-show="admin">
+						<a class="btn btn-warning btn-mini editEvent" href="#eventPopUp" data-toggle="modal"><i class="icon-white icon-edit"></i> Modifier</a>
+						<a class="btn btn-danger btn-mini delEvent" ng-click="deleteEvents({{e.id}})"><i class="icon-white icon-trash"></i> Supprimer</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<footer class="center">
+			<a href="#/index">[retour &agrave; l'accueil]</a>
+		</footer>
+	</section>
+</div>
+
+<div ng-include src="'partials/popup/eventPopUp.html'"></div>

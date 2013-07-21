@@ -1,0 +1,58 @@
+<div class="row-fluid" ng-controller="AllNewsCtrl">
+	<section class="span12">
+		<!--alert-->
+		<div class="alert well-dark alert-block white" id="createNewsSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>La news a bien &eacute;t&eacute; ajout&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteNewsSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>La news a bien &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteNewsError">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Erreur!</h3>
+			<p>La news n'a pas &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+
+		<!-- fin alert-->
+		<div class="page-header">
+			<h1>Liste des news
+				<a id="addNewsImg" ng-show="admin" href="#newsPopUp" data-toggle="modal"><i class="icon-plus icon-white"></i></a>
+			</h1>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Cat&eacute;gorie</th>
+					<th>Titre</th>
+					<th>Date de publication</th>
+					<th>Commentaires</th>
+					<th ng-show="admin"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="n in news" newsid={{n.id}}>
+					<td><a href="#/news/{{n.id}}">[Lire]</a></td>
+					<td>{{n.jeu}}</td>
+					<td>{{n.titre}}</td>
+					<td><time datetime="{{n.pubdate | date:'yyyy-MM-dd'}}" pubdate>Le <strong>{{n.pubdate | date:'dd MMMM yyyy &agrave; HH:mm:ss'}}</strong></time></td>
+					<td>{{n.nbComments}}</td>
+					<td ng-show="admin">
+						<a class="btn btn-warning btn-mini editNews" href="#newsPopUp" data-toggle="modal"><i class="icon-white icon-edit"></i> Modifier</a>
+						<a class="btn btn-danger btn-mini delNews" ng-click="deleteNews({{n.id}})"><i class="icon-white icon-trash"></i> Supprimer</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<footer class="center">
+			<a href="#/index">[retour &agrave; l'accueil]</a>
+		</footer>
+	</section>
+</div>
+
+<div ng-include src="'partials/popup/newsPopUp.html'"></div>

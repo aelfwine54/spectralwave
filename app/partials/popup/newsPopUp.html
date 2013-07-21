@@ -1,0 +1,52 @@
+<div id="newsPopUp" class="modal fade" ng-controller="NewsPopUpCtrl">
+	<header class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h2>{{title}}</h2>
+	</header>
+	<form class="form-horizontal" name="createNewsForm" ng-submit="createNews()">
+		<div class="modal-body">
+
+			<div class="alert alert-error alert-block" bs:alert="" id="createNewsError">
+				<a class="close alert-close">×</a>
+				<h3 class="alert-heading">Erreur!</h3>
+				<p>Une erreur s'est produite et la news n'a pas &eacute;t&eacute; cr&eacute;&eacute;</p>
+				<p>
+					<a class="btn alert-close">Fermer</a>
+				</p>
+			</div>
+			<div class="alert well-dark alert-block white" id="editNewsError">
+				<a class="close alert-close">×</a>
+				<h3 class="alert-heading">Erreur!</h3>
+				<p>La news n'a pas &eacute;t&eacute; modifi&eacute;.</p>
+			</div>
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="title">Titre</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" name="title" ng-model="news.titre" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="description">Description</label>
+					<div class="controls">
+						<textarea class="input-xlarge" name="description" rows="6" required ng-model="news.description"></textarea>
+						<span class="help-block"><a target="_BLANK" href="#/bbcode">Aide sur le bb-code</a></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="jeu">Jeu associ&eacute;</label>
+					<div class="controls">
+						<select name="jeu" ng-model="news.jeuId" ng-options="j.nom for j in jeux">
+							<!-- <option value="1">Minecraft</option>
+							<option value="2">World of Warcraft</option> -->
+						</select>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<footer class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
+			<button href="#" class="btn btn-primary" id="newsSubmit" ng-disabled="createNewsForm.$invalid">{{submitText}}</button>
+		</footer>
+	</form>
+</div>

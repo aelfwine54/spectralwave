@@ -1,0 +1,101 @@
+<div class="row-fluid" ng-controller="DetailledNewsCtrl">
+	<section class="span12">
+		<!--alert-->
+		<div class="alert well-dark alert-block white" id="addCommentSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succ&egrave;s!</h3>
+			<p>Le commentaire a bien &eacute;t&eacute; ajout&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="addCommentError">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Erreur!</h3>
+			<p>Le commentaire n'a pas &eacute;t&eacute; ajout&eacute;.</p>
+		</div>
+
+		<div class="alert well-dark alert-block white" id="deleteCommentSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succ&egrave;s!</h3>
+			<p>Le commentaire a bien &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteCommentError">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Erreur!</h3>
+			<p>Le commentaire n'a pas &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+
+		<div class="alert well-dark alert-block white" id="editNewsSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succes!</h3>
+			<p>La news a bien &eacute;t&eacute; modifi&eacute;.</p>
+		</div>
+		<!-- fin alert-->
+		
+		<h1 class="page-header">
+			Vue d&eacute;taill&eacute;e - News
+		</h1>
+		<div id="newsContainer">
+
+			<article class="well well-dark" newsId="{{news.id}}">
+				<a ng-show="admin" class="badge badge-inverse delNews pull-right"><i class="icon-white icon-trash"></i> Effacer</a>
+				<h2 class="well-header">{{news.titre}}
+					<a ng-show="admin" href="#newsPopUp" data-toggle="modal"><i class="icon-edit icon-white editNews"></i></a>
+				</h2>
+				<p ng-bind-html-unsafe="news.description"></p>
+				<footer class="well-footer">
+					<time class="pull-left" datetime="{{news.pubdate | date:'yyyy-MM-dd'}}" pubdate>Publi&eacute;e le <strong>{{news.pubdate | date:'dd MMMM yyyy &agrave; HH:mm:ss'}}</strong></time>
+					<span class="badge badge-inverse pull-right">
+						<i class="icon-tag icon-white"></i> <small>{{news.jeu}}</small>
+					</span>
+				</footer>
+			</article>
+		</div>
+
+		<h2>
+			Commentaires ({{news.nbComments}})
+		</h2>
+		<article ng-show="news.nbComments==0" class="well well-dark">
+			Il n'y a aucun commentaire pour le moment. Soyez le premier!
+		</article>
+
+		<article ng-repeat="c in comments" commentId="{{c.id}}">
+			<header>
+				Par {{c.auteur || 'Anonyme'}}  
+				<span ng-show="c.courriel">(<a href="mailto:{{c.courriel}}">{{c.courriel}}</a>)</span>
+				le <time datetime="{{c.date | date:'yyyy-MM-dd'}}" pubdate>{{c.date | date:'dd MMMM yyyy &agrave; HH:mm:ss'}}</time>
+				<a ng-show="admin" class="badge badge-inverse delComment pull-right"><i class="icon-white icon-trash"></i> Effacer</a>
+			</header>
+			<p class="well well-dark well-small" ng-bind-html-unsafe="c.contenu">
+				
+			</p>
+		</article>
+
+		<form class="center form-commentaire" name="AddCommentForm" ng-submit="addComment()" id="addCommentForm">
+			<legend>Commenter</legend>
+			<div ng-hide="connect" class="well well-dark">
+				<p>Vous devez &egrave;tre connect&eacute; pour poster un commentaire</p>
+			</div>
+
+			<div ng-show="connect">
+				<fieldset>
+					<div class="control-group">
+						<div class="controls center">
+							<textarea id="contenu" rows="5" class="input-xlarge" placeholder="Votre commentaire ici" required ng-model="newComm.contenu"></textarea>
+							<span class="help-block"><a target="_BLANK" href="#/bbcode">Aide sur le bb-code</a></span>
+						</div>
+					</div>
+				</fieldset>
+				<footer>
+					<input type="submit" value="Soumettre" class="btn btn-primary"/>
+					<input type="reset" value="Effacer" class="btn btn-warning" id="commentReset"/>
+				</footer>
+			</div>
+		</form>
+
+		<footer class="center">
+			<a href="#/news">[retour &agrave; la liste des news]</a>
+			<a href="#/index">[retour &agrave; l'accueil]</a>
+		</footer>
+	</section>
+</div>
+
+<div ng-include src="'partials/popup/newsPopUp.html'"></div>

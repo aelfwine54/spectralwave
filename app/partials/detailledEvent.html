@@ -1,0 +1,93 @@
+<div class="row-fluid" ng-controller="DetailledEventCtrl">
+	<section class="span12">
+		<!--alert-->
+		<div class="alert well-dark alert-block white" id="addCommentSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succ&egrave;s!</h3>
+			<p>Le commentaire a bien &eacute;t&eacute; ajout&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="addCommentError">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Erreur!</h3>
+			<p>Le commentaire n'a pas &eacute;t&eacute; ajout&eacute;.</p>
+		</div>
+
+		<div class="alert well-dark alert-block white" id="deleteCommentSuccess">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Succ&egrave;s!</h3>
+			<p>Le commentaire a bien &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+		<div class="alert well-dark alert-block white" id="deleteCommentError">
+			<a class="close alert-close">×</a>
+			<h3 class="alert-heading">Erreur!</h3>
+			<p>Le commentaire n'a pas &eacute;t&eacute; effac&eacute;.</p>
+		</div>
+		<!-- fin alert-->
+		
+		<h1 class="page-header">
+			Vue d&eacute;taill&eacute;e - Event
+		</h1>
+		<div id="newsContainer">
+			<article class="well well-dark" eventId="{{event.id}}">
+				<a ng-show="admin" class="badge badge-inverse delEvent pull-right"><i class="icon-white icon-trash"></i> Effacer</a>
+				<h2 class="well-header">{{event.titre}}
+					<a ng-show="admin" href="#eventPopUp" data-toggle="modal"><i class="icon-edit icon-white editEvent"></i></a>
+				</h2>
+				<p ng-bind-html-unsafe="event.description"></p>
+				<footer class="well-footer">
+					<time ng-show="event.date" class="pull-left" datetime="{{event.date | date:'yyyy-MM-dd'}}" pubdate>Pr&eacute;vu pour le <strong>{{event.date | date:'dd MMMM yyyy &agrave; HH:mm:ss'}}</strong></time>
+					<span class="badge badge-inverse pull-right">
+						<i class="icon-tag icon-white"></i> <small>{{event.jeu}}</small>
+					</span>
+				</footer>
+			</article>
+		</div>
+
+		<h2>
+			Commentaires ({{event.nbComments}})
+		</h2>
+		<article ng-show="event.nbComments==0" class="well well-dark">
+			Il n'y a aucun commentaire pour le moment. Soyez le premier!
+		</article>
+		<article ng-repeat="c in comments" commentId="{{c.id}}">
+			<header>
+				Par {{c.auteur|| 'Anonyme'}} 
+				<span ng-show="c.courriel">(<a href="mailto:{{c.courriel}}">{{c.courriel}}</a>)</span>
+				le <time datetime="{{c.date | date:'yyyy-MM-dd'}}" pubdate>{{c.date | date:'dd MMMM yyyy &agrave; HH:mm:ss'}}</time>
+				<i ng-show="admin" class="icon-white icon-trash pull-right pointer delComment"></i>
+			</header>
+			<p class="well well-dark well-small" ng-bind-html-unsafe="c.contenu">
+				
+			</p>
+		</article>
+
+		<form class="center form-commentaire" name="AddCommentForm" ng-submit="addComment()" id="addCommentForm">
+			<legend>Commenter</legend>
+			<div ng-hide="connect" class="well well-dark">
+				<p>Vous devez &egrave;tre connect&eacute; pour poster un commentaire</p>
+			</div>
+
+			<div ng-show="connect">
+				<fieldset>
+					<div class="control-group">
+						<div class="controls center">
+							<textarea id="contenu" rows="5" class="input-xlarge" placeholder="Votre commentaire ici" required ng-model="newComm.contenu"></textarea>
+							<span class="help-block"><a target="_BLANK" href="#/bbcode">Aide sur le bb-code</a></span>
+						</div>
+					</div>
+				</fieldset>
+				<footer>
+					<input type="submit" value="Soumettre" class="btn btn-primary"/>
+					<input type="reset" value="Effacer" class="btn btn-warning" id="commentReset"/>
+				</footer>
+			</div>
+		</form>
+
+		<footer class="center">
+			<a href="#/events">[retour &agrave; la liste des events]</a>
+			<a href="#/index">[retour &agrave; l'accueil]</a>
+		</footer>
+	</section>
+</div>
+
+<div ng-include src="'partials/popup/eventPopUp.html'"></div>
