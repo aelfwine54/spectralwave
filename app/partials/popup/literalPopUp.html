@@ -1,0 +1,43 @@
+<div id="literalPopUp" class="modal fade" ng-controller="LiteralPopUpCtrl">
+	<header class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h2>{{title}}</h2>
+	</header>
+	<form class="form-horizontal" name="createLiteralForm" ng-submit="createLiteral()">
+		<div class="modal-body">
+
+			<div class="alert alert-error alert-block" bs:alert="" id="createLiteralError">
+				<a class="close alert-close">×</a>
+				<h3 class="alert-heading">Erreur!</h3>
+				<p>Une erreur s'est produite et le literal n'a pas &eacute;t&eacute; cr&eacute;&eacute;</p>
+				<p>
+					<a class="btn alert-close">Fermer</a>
+				</p>
+			</div>
+			<div class="alert well-dark alert-block white" id="editLiteralError">
+				<a class="close alert-close">×</a>
+				<h3 class="alert-heading">Erreur!</h3>
+				<p>Le literal n'a pas &eacute;t&eacute; modifi&eacute;.</p>
+			</div>
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="title">Nom</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" name="title" ng-model="literal.name" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="description">Valeur</label>
+					<div class="controls">
+						<textarea class="input-xxxlarge" name="description" rows="6" required ng-model="literal.value"></textarea>
+						<span class="help-block"><a target="_BLANK" href="#/bbcode">Aide sur le bb-code</a></span>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<footer class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
+			<button href="#" class="btn btn-primary" id="literalSubmit" ng-disabled="createLiteralForm.$invalid">{{submitText}}</button>
+		</footer>
+	</form>
+</div>

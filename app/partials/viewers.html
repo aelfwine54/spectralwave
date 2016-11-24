@@ -1,25 +1,26 @@
-<section class="section">
+<section class="section" ng-controller="LiteralCtrl" ng-init="init('mapviewer')">
 	<article>
 		<div class="page-header">
-			<h1>SpectralWave map viewer</h1>
+			<h1>SpectralWave map viewer <a ng-show="admin" href="#literalsPopUp" data-toggle="modal"><i class="icon-edit icon-white editLiteral" literal="mapviewer"></i></a></h1>
 		</div>
 		<div class="viewer" width="97%">
-			<!-- <iframe src="http://77.111.203.227:25570/#" width="97%" height="850">
+			<iframe src="{{value}}" width="97%" height="850">
 				<p>Votre navigateur ne supporte pas l'integration de Mapviewer sur le site.</p>
-			</iframe> -->
-			<p class="well well-dark">Le map viewer n'est pas diponible pour le moment.</p>
+			</iframe> 
 		</div>
 	</article>
 </section>
-<section>
+<section ng-controller="LiteralCtrl" ng-init="init('mumbleviewer')">
 	<article>
 		<div class="page-header">	
-			<h1>Mumble viewer</h1>
+			<h1>Mumble viewer <a ng-show="admin" href="#literalsPopUp" data-toggle="modal"><i class="icon-edit icon-white editLiteral" literal="mumbleviewer"></i></a></h1>
 		</div>
 		<div class="viewer" width="250">
-			<iframe src="http://viewer.mumblegratuit.com/mumbleviewer.php?id=22564&width=250&height=390&font_size=11&font=Tahoma&color=FFF&background=000" scrolling="vertical" frameborder="0" height="390" width="250">
+			<iframe src="{{value}}" scrolling="vertical" frameborder="0" height="390" width="250">
 				<p>Votre navigateur ne supporte pas l'integration de Mumbleviewer sur le site.</p>
 			</iframe>
 		</div>
 	</article>
 </section>
+
+<div ng-include src="'partials/popup/literalPopUp.html'"></div>

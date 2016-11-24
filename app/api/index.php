@@ -1,6 +1,11 @@
 <?php
 session_cache_limiter(false);
 session_start();
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+ini_set('intl.default_locale', 'fr-CA');
+define('default_locale', 'fr-CA');
 //echo json_encode(ORM::get_query_log());
 //echo json_encode(ORM::get_last_query());
 
@@ -25,13 +30,15 @@ require_once 'data/Event.php';
 require_once 'data/Commentaires_Event.php';
 require_once 'data/Commentaires_Nouvelle.php';
 require_once 'data/Nouvelle.php';
+require_once 'data/Literal.php';
 
 require_once 'logique/Login.php';
 require_once 'logique/Informatif.php';
+require_once 'logique/CSM.php';
 
 ORM::configure('mysql:host=localhost;dbname=frederic_spectralwave');
-ORM::configure('username', 'frederic');
-ORM::configure('password', '!Fb9630161');
+ORM::configure('username', 'root');
+ORM::configure('password', '');
 ORM::configure('logging', true);
 
 $app = new Slim(array('mode' => 'development','debug' =>true, 'cookies.secret_key' => 'rolecraft',
@@ -60,6 +67,13 @@ $authenticateForRole = function ( $role = 'Visiteur' ) {
  */
 $app->post('/connect', 'connect');
 $app->post('/logout', 'logout');
+
+/*
+ * Literals
+ */
+$app->get('/literals/:name', $authenticateForRole('Visiteur'), 'getLiteral');
+$app->post('/literals', $authenticateForRole('Admin'), 'postLiteral');
+$app->put('/literals/:name', $authenticateForRole('Admin'), 'putLiteral');
 
 
 /*

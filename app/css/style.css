@@ -14,10 +14,10 @@
 }
 
 .white{
-	color:white;
+	color:white !important;
 }
 .red{
-	color:red;
+	color:red !important;
 }
 
 .footer{
